@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
+    <h2 class="clock">00:00:00</h2>
+    <h1 class="greeting hidden"></h1>
     <form class="login-form hidden">
       <input
         required
@@ -17,15 +19,29 @@
       />
       <button>Log In</button>
     </form>
-    <h2 class="clock">00:00:00</h2>
-    <h1 class="greeting hidden"></h1>
+    <form class="todo-form">
+      <input
+        class="todo-input"
+        required
+        type="text"
+        placeholder="Write a To Do and Press Enter"
+      />
+    </form>
+    <ul class="todo-list"></ul>
     <div class="quotes">
       <span class="quote"></span>
       <span class="author"></span>
+    </div>
+    <div class="weather-box">
+      <span class="city"></span>
+      <span class="weather"></span>
+      <span class="temperature"></span>
     </div>
   </body>
   <script src="js/greetings.js"></script>
   <script src="js/clock.js"></script>
   <script src="js/quotes.js"></script>
   <script src="js/background.js"></script>
+  <script src="js/todo.js"></script>
+  <script src="js/weather.js"></script>
 </html>
