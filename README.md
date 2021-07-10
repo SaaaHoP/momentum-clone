@@ -1,2 +1,3 @@
-momentum-clone
-for studying JS
+momentum-clone for studying JS\
+https://saaahop.github.io/momentum-clone/
+
