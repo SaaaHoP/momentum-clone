@@ -10,13 +10,34 @@ const addTodo = (todoObject) => {
 
   li.className = todoObject.id;
   span.innerText = todoObject.text;
-  button.innerText = 'delete';
+  span.classList.add('todo');
+  button.innerText = '❌';
+  if (todoObject.clicked) {
+    span.classList.add('todoClicked');
+  } else {
+    span.classList.remove('todoClicked');
+  }
   button.addEventListener('click', deleteTodo);
+  span.addEventListener('click', todoClicked);
   li.appendChild(span);
   li.appendChild(button);
   todoList.appendChild(li);
 };
 
+//todo 클릭했을때 가운데 줄 그어주기, 그어져 있으면 취소하기
+const todoClicked = (e) => {
+  const clickedTodo = e.target;
+  const selectedLi = e.target.parentElement;
+  clickedTodo.classList.toggle('todoClicked');
+  todoArr.forEach((item) => {
+    if (item.id === parseInt(selectedLi.className)) {
+      item.clicked = !item.clicked;
+    }
+  });
+  localStorageSet();
+};
+
+//todo 삭제하기
 const deleteTodo = (e) => {
   const selectedLi = e.target.parentElement;
   selectedLi.remove();
@@ -37,6 +58,7 @@ todoForm.addEventListener('submit', (e) => {
   const todoObject = {
     text: todoItem,
     id: Date.now(),
+    clicked: false,
   };
   todoInput.value = '';
   todoArr.push(todoObject);

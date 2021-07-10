@@ -8,34 +8,43 @@
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
-    <h2 class="clock">00:00:00</h2>
-    <h1 class="greeting hidden"></h1>
-    <form class="login-form hidden">
-      <input
-        required
-        maxlength="10"
-        type="text"
-        placeholder="What is your name?"
-      />
-      <button>Log In</button>
-    </form>
-    <form class="todo-form">
-      <input
-        class="todo-input"
-        required
-        type="text"
-        placeholder="Write a To Do and Press Enter"
-      />
-    </form>
-    <ul class="todo-list"></ul>
+    <div class="main-box">
+      <h1 class="clock">00:00:00</h1>
+      <h2 class="greeting hidden"></h2>
+      <form class="login-form hidden">
+        <input
+          required
+          maxlength="10"
+          type="text"
+          placeholder="What is your name?"
+        />
+        <button class="hidden">Log In</button>
+      </form>
+      <form class="todo-form hidden">
+        <input
+          class="todo-input"
+          required
+          type="text"
+          placeholder="Write a To Do and Press Enter"
+        />
+      </form>
+      <ul class="todo-list"></ul>
+    </div>
     <div class="quotes">
       <span class="quote"></span>
       <span class="author"></span>
     </div>
     <div class="weather-box">
-      <span class="city"></span>
-      <span class="weather"></span>
-      <span class="temperature"></span>
+      <div class="icon-weather-temperature-box">
+        <div class="icon-weather-box"></div>
+        <div class="weather-temperature-box">
+          <span class="weather"></span>
+          <span class="temperature"></span>
+        </div>
+      </div>
+      <div class="city-box">
+        <span class="city"></span>
+      </div>
     </div>
   </body>
   <script src="js/greetings.js"></script>
