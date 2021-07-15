@@ -36,7 +36,7 @@ naver.addEventListener('click', () => {
 searchBox.addEventListener('submit', (e) => {
   e.preventDefault();
   const searchText = searchInput.value;
-  const searchGoogle = `https://www.google.co.kr/search?q=${searchText}&dcr=0&sxsrf=ALeKk02cP-RorBIMNsejPjZylMrwPLmGrw%3A1626327971204&ei=o8vvYOi7BNXK-Qaar4vwDg&oq=%EC%95%88%EB%85%95%ED%95%98%EC%84%B8%EC%9A%94&gs_lcp=Cgdnd3Mtd2l6EAMyBQgAELEDMgIIADICCAAyAggAMgIIADICCAAyAggAMgIIADICCAAyAggAOgcIIxCwAxAnOgcIABBHELADOgQIIxAnOggIABCxAxCDAToECAAQCjoHCCMQ6gIQJzoECAAQA0oECEEYAFCrHlihKmCrK2gDcAJ4AoAByQKIAbgZkgEIMS4xLjEyLjGYAQCgAQGqAQdnd3Mtd2l6sAEKyAEIwAEB&sclient=gws-wiz&ved=0ahUKEwiomYTor-TxAhVVZd4KHZrXAu4Q4dUDCA4&uact=5`;
+  const searchGoogle = `https://www.google.com/search?q=${searchText}`;
   const searchNaver = `https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=1&ie=utf8&query=${searchText}`;
   searchInput.value = '';
   if (isGoogle) {
