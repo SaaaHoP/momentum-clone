@@ -30,20 +30,37 @@
       </form>
       <ul class="todo-list"></ul>
     </div>
+
     <div class="quotes">
       <span class="quote"></span>
       <span class="author"></span>
     </div>
-    <div class="weather-box">
-      <div class="icon-weather-temperature-box">
-        <div class="icon-weather-box"></div>
-        <div class="weather-temperature-box">
-          <span class="weather"></span>
-          <span class="temperature"></span>
+    <div class="upper-box">
+      <form class="search-box">
+        <div class="search-icon">
+          <i class="fas fa-search"></i>
         </div>
-      </div>
-      <div class="city-box">
-        <span class="city"></span>
+        <div class="search-hidden-box">
+          <input class="search-input" type="text" />
+          <div class="search-engine">
+            <div class="google">
+              <i class="fab fa-google"></i>
+            </div>
+            <div class="naver hidden">N</div>
+          </div>
+        </div>
+      </form>
+      <div class="weather-box">
+        <div class="icon-weather-temperature-box">
+          <div class="icon-weather-box"></div>
+          <div class="weather-temperature-box">
+            <span class="weather"></span>
+            <span class="temperature"></span>
+          </div>
+        </div>
+        <div class="city-box">
+          <span class="city"></span>
+        </div>
       </div>
     </div>
   </body>
@@ -53,4 +70,9 @@
   <script src="js/background.js"></script>
   <script src="js/todo.js"></script>
   <script src="js/weather.js"></script>
+  <script src="js/search.js"></script>
+  <script
+    src="https://kit.fontawesome.com/76131a09e0.js"
+    crossorigin="anonymous"
+  ></script>
 </html>

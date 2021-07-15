@@ -133,6 +133,11 @@ button {
   cursor: pointer;
 }
 
+.upper-box {
+  display: flex;
+  justify-content: space-between;
+}
+
 .weather-box {
   display: flex;
   flex-direction: column;
@@ -144,7 +149,12 @@ button {
 .weather,
 .temperature,
 .city {
+  font-size: 16px;
+}
+
+.temperature {
   font-size: 20px;
+  font-weight: bold;
 }
 
 .icon-weather-temperature-box {
@@ -170,5 +180,56 @@ button {
   flex-direction: column;
 }
 
-.citybox {
+.search-box {
+  margin-left: 20px;
+  margin-top: 10px;
+  z-index: 999;
+  width: 250px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+}
+
+.search-input {
+  position: relative;
+  width: 200px;
+  text-align: left;
+  border: none;
+  border-bottom: 2px solid white;
+  padding-left: 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.search-icon {
+  position: absolute;
+}
+.search-icon i {
+  color: white;
+}
+
+.search-hidden-box {
+  display: flex;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.1s 0.1s;
+}
+
+.search-reveal {
+  opacity: 1;
+  overflow-y: auto;
+}
+
+.fab {
+  color: white;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.naver {
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  cursor: pointer;
+  margin-left: 10px;
 }

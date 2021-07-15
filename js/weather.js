@@ -1,27 +1,35 @@
-const API_KEY = 'faed19af8fcb125709bd23fdf127d699';
+const API_KEY = 'c3e9a855ccf74a4b94c90025211507';
+// const GOOGLE_API_KEY = 'AIzaSyAb7SVZpvCvYYDEF-GoXfJFX8mrK9HwJ3I';
+// const googleUrl = `https://www.googleapis.com/geolocation/v1/geolocate?key=${GOOGLE_API_KEY}`;
 const weatherBox = document.querySelector('.icon-weather-box');
+
 const onGeoSuccess = (location) => {
   const latitude = location.coords.latitude;
   const longitude = location.coords.longitude;
-  const url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${API_KEY}&units=metric`;
+  console.log(location.coords.accuracy, latitude, longitude);
+  const url = `https://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${latitude},${longitude}&aqi=yes`;
   fetch(url)
     .then((res) => res.json())
     .then((data) => {
+      console.log(data);
       const city = document.querySelector('.city');
-      const weather = document.querySelector('.weather');
+      // const weather = document.querySelector('.weather');
       const temperature = document.querySelector('.temperature');
       const icon = document.createElement('img');
       icon.classList.add('weather-icon');
-      icon.src = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
+      icon.src = `https://${data.current.condition.icon.substring(2)}`;
       weatherBox.appendChild(icon);
-      console.dir(icon);
-      console.log(data);
-      city.innerText = data.name;
-      weather.innerText = `${data.weather[0].main}`;
-      temperature.innerText = `${data.main.temp} °C`;
+      city.innerText = data.location.name;
+      // weather.innerText = data.current.condition.text;
+      temperature.innerText = `${data.current.temp_c} °C`;
     });
 };
 
 const onGeoFail = () => {};
+const options = {
+  enableHighAccuracy: true,
+  timeout: 500,
+  maximumAge: 500,
+};
 
-navigator.geolocation.getCurrentPosition(onGeoSuccess, onGeoFail);
+navigator.geolocation.getCurrentPosition(onGeoSuccess, onGeoFail, options);
