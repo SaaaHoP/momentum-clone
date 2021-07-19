@@ -72,7 +72,6 @@ const editTodo = (e) => {
   highlightIcon.className = 'fas fa-highlighter';
   highlightIcon.classList.add('highlightIcon');
   document.body.appendChild(reviseBox);
-  // e.currentTarget.parentElement.appendChild(reviseBox);
 
   reviseBox.appendChild(reviseButton);
   reviseBox.appendChild(highlightButton);
@@ -87,33 +86,6 @@ const editTodo = (e) => {
 
 //todo 수정하기
 const reviseTodo = (e) => {};
-
-//화면 밖 클릭시 수정화면 끄기
-document.body.addEventListener('click', (e) => {
-  const reviseBox = document.querySelectorAll('.arrow-box');
-  console.log(e.target.parentElement);
-  if (
-    e.target == e.currentTarget.querySelector('.arrow-box') ||
-    e.target == e.currentTarget.querySelector('.reviseIcon') ||
-    e.target == e.currentTarget.querySelector('.highlightIcon')
-  ) {
-    e.currentTarget.querySelector('.arrow-box').style.opacity = '1';
-    console.log('안쪽클릭1');
-    return;
-  }
-
-  if (
-    e.target.parentElement == e.currentTarget.querySelector('.revise-button')
-  ) {
-    e.currentTarget.querySelector('.arrow-box').style.opacity = '1';
-    console.log('안쪽클릭2');
-    return;
-  }
-
-  reviseBox.forEach((item) => {
-    item.style.opacity = '0';
-  });
-});
 
 const localStorageSet = () => {
   localStorage.setItem('todoArr', JSON.stringify(todoArr));
