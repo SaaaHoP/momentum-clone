@@ -24,8 +24,9 @@ const addTodo = (todoObject) => {
   } else {
     span.classList.remove('todoClicked');
   }
+
   buttonDelete.addEventListener('click', deleteTodo);
-  buttonRevise.addEventListener('click', editTodo);
+  buttonRevise.addEventListener('click', openEdit);
   span.addEventListener('click', todoClicked);
   li.appendChild(span);
   li.appendChild(buttonDelete);
@@ -33,7 +34,38 @@ const addTodo = (todoObject) => {
   li.appendChild(buttonRevise);
   buttonRevise.appendChild(reviseIcon);
   todoList.appendChild(li);
+
+  //더보기 팝업창 추가
+  const reviseBox = document.createElement('div');
+  const reviseButton = document.createElement('button');
+  const reviseIcon2 = document.createElement('i');
+  const highlightButton = document.createElement('button');
+  const highlightIcon = document.createElement('i');
+
+  reviseBox.className = 'arrow-box';
+  reviseIcon2.className = 'far fa-edit';
+  reviseIcon2.classList.add('reviseIcon2');
+  highlightIcon.className = 'fas fa-highlighter';
+  highlightIcon.classList.add('highlightIcon');
+
+  li.appendChild(reviseBox);
+  reviseBox.appendChild(reviseButton);
+  reviseBox.appendChild(highlightButton);
+  reviseButton.appendChild(reviseIcon2);
+  highlightButton.appendChild(highlightIcon);
+  reviseButton.addEventListener('click', reviseTodo);
 };
+
+// 더보기창 영역외 눌렀을시 닫아버리기
+// document.querySelector('.main-box').addEventListener('click', (e) => {
+//   console.log(e.target.parentElement);
+//   const arrowBoxes = document.querySelectorAll('.arrow-box');
+//   if (e.target !== arrowBoxes ) {
+//     arrowBoxes.forEach((item) => {
+//       item.classList.remove('arrow-box-reveal');
+//     });
+//   }
+// });
 
 //todo 클릭했을때 가운데 줄 그어주기, 그어져 있으면 취소하기
 const todoClicked = (e) => {
@@ -60,32 +92,46 @@ const deleteTodo = (e) => {
 };
 
 //todo 수정창 열기
-const editTodo = (e) => {
-  const reviseBox = document.createElement('div');
-  const reviseButton = document.createElement('button');
-  const reviseIcon = document.createElement('i');
-  const highlightButton = document.createElement('button');
-  const highlightIcon = document.createElement('i');
-  reviseBox.className = 'arrow-box';
-  reviseIcon.className = 'far fa-edit';
-  reviseIcon.classList.add('reviseIcon');
-  highlightIcon.className = 'fas fa-highlighter';
-  highlightIcon.classList.add('highlightIcon');
-  document.body.appendChild(reviseBox);
-
-  reviseBox.appendChild(reviseButton);
-  reviseBox.appendChild(highlightButton);
-  reviseButton.appendChild(reviseIcon);
-  highlightButton.appendChild(highlightIcon);
-  reviseButton.addEventListener('click', reviseTodo);
-
-  reviseBox.style.left = e.currentTarget.offsetLeft + 20 + 'px';
-  reviseBox.style.top = e.currentTarget.offsetTop - 10 + 'px';
-  reviseBox.classList.add('arrow-box-reveal');
+const openEdit = (e) => {
+  e.currentTarget.parentElement
+    .querySelector('.arrow-box')
+    .classList.toggle('arrow-box-reveal');
 };
 
 //todo 수정하기
-const reviseTodo = (e) => {};
+const reviseTodo = (e) => {
+  const reviseForm = document.createElement('form');
+  const reviseInput = document.createElement('input');
+  const li = e.currentTarget.parentElement.parentElement;
+  const span =
+    e.currentTarget.parentElement.parentElement.querySelector('span');
+  reviseInput.classList.add('revise-input');
+  //hidden전에 span 길이 저장
+  reviseInput.style.width = `${span.clientWidth + 4}px`;
+
+  span.classList.add('hidden');
+  li.prepend(reviseForm);
+  reviseForm.appendChild(reviseInput);
+  reviseInput.value = span.innerText;
+  reviseInput.focus();
+
+  reviseForm.addEventListener('submit', (e) => {
+    console.log(e);
+    e.preventDefault();
+    todoArr.forEach((item) => {
+      if (item.id === parseInt(li.className)) {
+        item.text = reviseInput.value;
+      }
+    });
+    span.innerText = reviseInput.value;
+    localStorageSet();
+    span.classList.remove('hidden');
+    reviseInput.classList.add('hidden');
+
+    //입력하고 난 뒤, 열려있던 팝업창 닫아주기
+    openEdit(e);
+  });
+};
 
 const localStorageSet = () => {
   localStorage.setItem('todoArr', JSON.stringify(todoArr));
