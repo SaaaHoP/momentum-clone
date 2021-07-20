@@ -128,9 +128,39 @@ button {
 
 .todo-list {
   width: 500px;
-  height: 0;
+  height: 0px;
   list-style: none;
   padding-left: 0;
+  margin-bottom: 0;
+}
+
+.todo-list-box {
+  width: 500px;
+  height: 155px;
+  overflow: auto;
+}
+
+.todo-list-box::-webkit-scrollbar {
+  background-color: transparent;
+  width: 7px;
+}
+
+.todo-list-box::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+.todo-list-box::-webkit-scrollbar-track:hover {
+  opacity: 1;
+}
+
+.todo-list-box::-webkit-scrollbar-thumb {
+  background-color: #babac0;
+  border-radius: 16px;
+  border: 4px solid transparent;
+}
+
+.todo-list-box::-webkit-scrollbar-button {
+  display: none;
 }
 
 .todoClicked {
@@ -298,6 +328,9 @@ button {
   color: white;
 }
 
+.highlight-box {
+  left: 100px;
+}
 /* 모바일 전용 media-query */
 @media screen and (max-width: 530px) {
   h1 {

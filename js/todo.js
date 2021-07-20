@@ -1,6 +1,7 @@
 const todoForm = document.querySelector('.todo-form');
 const todoInput = document.querySelector('.todo-input');
 const todoList = document.querySelector('.todo-list');
+const todoListBox = document.querySelector('.todo-list-box');
 let todoArr = [];
 
 const addTodo = (todoObject) => {
@@ -25,6 +26,10 @@ const addTodo = (todoObject) => {
     span.classList.remove('todoClicked');
   }
 
+  if (todoObject.color) {
+    span.style.color = todoObject.color;
+  }
+
   buttonDelete.addEventListener('click', deleteTodo);
   buttonRevise.addEventListener('click', openEdit);
   span.addEventListener('click', todoClicked);
@@ -33,7 +38,7 @@ const addTodo = (todoObject) => {
   buttonDelete.appendChild(deleteIcon);
   li.appendChild(buttonRevise);
   buttonRevise.appendChild(reviseIcon);
-  todoList.appendChild(li);
+  todoListBox.appendChild(li);
 
   //더보기 팝업창 추가
   const reviseBox = document.createElement('div');
@@ -54,6 +59,7 @@ const addTodo = (todoObject) => {
   reviseButton.appendChild(reviseIcon2);
   highlightButton.appendChild(highlightIcon);
   reviseButton.addEventListener('click', reviseTodo);
+  highlightButton.addEventListener('click', highlightTodo);
 };
 
 // 더보기창 영역외 눌렀을시 닫아버리기
@@ -103,8 +109,7 @@ const reviseTodo = (e) => {
   const reviseForm = document.createElement('form');
   const reviseInput = document.createElement('input');
   const li = e.currentTarget.parentElement.parentElement;
-  const span =
-    e.currentTarget.parentElement.parentElement.querySelector('span');
+  const span = li.querySelector('span');
   reviseInput.classList.add('revise-input');
   //hidden전에 span 길이 저장
   reviseInput.style.width = `${span.clientWidth + 4}px`;
@@ -133,6 +138,20 @@ const reviseTodo = (e) => {
   });
 };
 
+//Todo 글씨색상 바꿔주기
+const highlightTodo = (e) => {
+  const li = e.currentTarget.parentElement.parentElement;
+  const span = li.querySelector('span');
+  const color = `#${Math.round(Math.random() * 0xffffff).toString(16)}`;
+  span.style.color = color;
+  todoArr.forEach((item) => {
+    if (item.id === parseInt(li.className)) {
+      item.color = color;
+    }
+    localStorageSet();
+  });
+};
+
 const localStorageSet = () => {
   localStorage.setItem('todoArr', JSON.stringify(todoArr));
 };
@@ -144,6 +163,7 @@ todoForm.addEventListener('submit', (e) => {
     text: todoItem,
     id: Date.now(),
     clicked: false,
+    color: '',
   };
   todoInput.value = '';
   todoArr.push(todoObject);
